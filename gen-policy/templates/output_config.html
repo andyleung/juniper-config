@@ -1,0 +1,22 @@
+<html>
+<title> Output SRX Policy Configuration </title>
+<h2> SRX config for {{ num_of_policy }} policies </h2>
+<pre>
+
+from-zone {{zone_A}} to-zone {{zone_B}} {
+{% for k in range(num_of_policy | int) %}
+    policy XXX-{{k}} {
+	match {
+	    source-address any;
+	    destination-address 10.10.{{k//256}}.{{k%256}};
+	    application any;
+	}
+	then {
+	    permit;
+	}
+    }
+{% endfor %}
+}
+
+</pre>
+</html>
