@@ -1,26 +1,37 @@
 <html>
 <title> Output SRX Policy Configuration </title>
-<h2> SRX config for {{ num_of_policy }} policies </h2>
+<h2> ##SRX config for {{ num_of_policy }} policies </h2>
 <pre>
-
-from-zone {{zone_A}} to-zone {{zone_B}} {
-{% for k in range(num_of_policy | int) %}
-    policy XXX-{{k}} {
-	match {
-	    source-address any;
-	    destination-address 10.10.{{k//256}}.{{k%256}};
-	    application any;
-	}
-	then {
-	    permit;
-	{% if logging == "on" %} log {
-			session-init
-		} {% endif %}
-	{% if count == "on" %} count {% endif %}
-	}
+security {
+   zones {
+    security-zone {{zone_B}} {
+    	address-book {
+	       {% for k in range(1, (num_of_policy | int) + 1 ) %}
+    	      address XXX-addr-{{k}} 10.10.{{k//256}}.{{k%256}}/32;
+    	   {% endfor %}
     }
-{% endfor %}
+    }
+   }
+   policies {
+     from-zone {{zone_A}} to-zone {{zone_B}} {
+	 {% for k in range(1, num_of_policy | int) %}
+        policy XXX-{{k}} {
+		   match {
+	          source-address any;
+	    	  destination-address XXX-addr-{{k}};
+	    	  application any;
+		   }
+		   then {
+	    		permit;
+			{% if logging == "on" %} log {
+				session-init
+			    } {% endif %}
+	        {% if count == "on" %} count {% endif %}
+	        }
+        }
+	{% endfor %}
+	 }
+   }
 }
-
 </pre>
 </html>
