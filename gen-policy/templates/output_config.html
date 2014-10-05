@@ -4,7 +4,27 @@
 <pre>
 security {
    zones {
+    security-zone {{zone_A}} {
+       interfaces {
+         {{Interface_A}} {
+            host-inbound-traffic {
+            	system-services {
+            	   all;
+            }
+        }
+     }
+   }
+}
     security-zone {{zone_B}} {
+        interfaces {
+           {{Interface_B}} {
+              host-inbound-traffic {
+                 system-services {
+                    all;
+             }
+          }
+       }
+    }
     	address-book {
 	       {% for k in range(1, (num_of_policy | int) + 1 ) %}
     	      address XXX-addr-{{k}} 10.10.{{k//256}}.{{k%256}}/32;

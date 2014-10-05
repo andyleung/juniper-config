@@ -24,11 +24,15 @@ class MainPage(Handler):
 	num_of_policy = self.request.get("num_of_policy")
 	zone_A = self.request.get("zone_A")
 	zone_B = self.request.get("zone_B")
+	Interface_A = self.request.get("Interface_A")
+	Interface_B = self.request.get("Interface_B")
     	logging = self.request.get("logging")
     	count = self.request.get("count")
 	params = dict(num_of_policy = num_of_policy,
 			zone_A = zone_A,
 			zone_B = zone_B,
+			Interface_A = Interface_A,
+			Interface_B = Interface_B,
     			logging = logging,
     			count = count)
 	if not (num_of_policy and zone_A and zone_B):
