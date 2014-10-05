@@ -13,6 +13,10 @@ from-zone {{zone_A}} to-zone {{zone_B}} {
 	}
 	then {
 	    permit;
+	{% if logging == "on" %} log {
+			session-init
+		} {% endif %}
+	{% if count == "on" %} count {% endif %}
 	}
     }
 {% endfor %}
