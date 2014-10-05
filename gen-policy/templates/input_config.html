@@ -1,21 +1,38 @@
+
 <html>
-   <h2> {{ error_messages }} </h2>
-   <form method=post >
-      <label>
-	Number of policies:
-      </label>
-         <input type="text" name="num_of_policy" value="{{num_of_policy}}" > 
-      <br>
-      <label>
-	Zone A:
-      </label>
-         <input type="text" name="zone_A" value="{{zone_A}}" > 
-      <br>
-      <label>
-	Zone B:
-      </label>
-         <input type="text" name="zone_B" value="{{zone_B}}" > 
-      <br>
+   <h2> SRX Test Policy Generator</h2>
+   
+   <form method=post > 
+   <table>
+      <tr>
+         <td> Number of policies:</td>
+         <td> <input type="text" name="num_of_policy" value="{{num_of_policy}}" > </td>
+         <td> </td>
+      </tr>
+
+      <tr>
+         <td> Zone A: </td>
+         <td> <input type="text" name="zone_A" value="{{zone_A}}" > </td>
+         <td> (e.g. trust) </td>
+      </tr>
+
+      <tr>    
+	     <td> Zone A Interface: </td>
+        <td> <input type="text" name="Interface_A" value="{{interface_A}}" > </td>
+        <td> (e.g. ge-0/0/0) </td>
+      </tr>
+      <tr>
+         <td> Zone B: </td>
+         <td> <input type="text" name="zone_B" value="{{zone_B}}" > </td>
+         <td> (e.g. untrust) </td>
+      </tr>
+      <tr>
+         <td> Zone B Interface: </td>
+         <td> <input type="text" name="Interface_B" value="{{interface_B}}" > </td>
+         <td> (e.g. ge-0/0/1) </td>
+      </tr>
+   </table>
+   <br>
       <label>
 	Logging:
       </label>
@@ -26,8 +43,8 @@
       </label>
    <input type="checkbox" name="count" value="on"> 
    <br>
-
-	<input type="submit"> 
+   <br>
+	   <input type="submit"> 
    </form>
 </html>
 
